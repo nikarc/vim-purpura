@@ -278,6 +278,8 @@ call <sid>hi('jsFuncCall', s:cdVeryLightGreen, {}, 'none', {})
 call <sid>hi('jsObjectValue', s:cdLightBlue, {}, 'none', {})
 call <sid>hi('jsParen', s:cdLightBlue, {}, 'none', {})
 call <sid>hi('jsObjectProp', s:cdLightBlue, {}, 'none', {})
+call <sid>hi('jsString', s:cdSearchCurrent, {}, 'none', {})
+call <sid>hi('jsComment', s:cdViolet, {}, 'none', {})
 
 " Typescript:
 call <sid>hi('typescriptLabel', s:cdLightBlue, {}, 'none', {})
