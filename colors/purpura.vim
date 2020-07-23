@@ -27,6 +27,20 @@ fun! <sid>hi(group, fg, bg, attr, sp)
     exec "hi " . a:group . " guisp=" . a:sp.gui
   endif
 endfun
+fun! <sid>trans(group, fg, bg, attr, sp)
+  if !empty(a:fg)
+    exec "trans " . a:group . " guifg=" . a:fg.gui . " ctermfg=" . (g:purpura_term256 ? a:fg.cterm256 : a:fg.cterm)
+  endif
+  if !empty(a:bg)
+    exec "trans " . a:group . " guibg=" . a:bg.gui . " ctermbg=" . (g:purpura_term256 ? a:bg.cterm256 : a:bg.cterm)
+  endif
+  if a:attr != ""
+    exec "trans " . a:group . " gui=" . a:attr . " cterm=" . a:attr
+  endif
+  if !empty(a:sp)
+    exec "trans " . a:group . " guisp=" . a:sp.gui
+  endif
+endfun
 
 " ------------------
 " Color definitions:
@@ -83,11 +97,11 @@ let s:cdSplitLight = {'gui': '#898989', 'cterm': 'NONE', 'cterm256': 'NONE'}
 let s:cdSplitDark = {'gui': '#444444', 'cterm': 'NONE', 'cterm256': 'NONE'}
 let s:cdSplitThumb = {'gui': '#424242', 'cterm': 'NONE', 'cterm256': 'NONE'}
 
-let s:cdCursorDarkDark = {'gui': '#25003d', 'cterm': 'NONE', 'cterm256': 'NONE'}
+let s:cdCursorDarkDark = {'gui': '#350057', 'cterm': 'NONE', 'cterm256': 'NONE'}
 let s:cdCursorDark = {'gui': '#51504F', 'cterm': 'NONE', 'cterm256': 'NONE'}
 let s:cdCursorLight = {'gui': '#AEAFAD', 'cterm': 'NONE', 'cterm256': 'NONE'}
-let s:cdSelection = {'gui': '#471469', 'cterm': 'NONE', 'cterm256': 'NONE'}
-let s:cdLineNumber = {'gui': '#480275', 'cterm': 'NONE', 'cterm256': 'NONE'}
+let s:cdSelection = {'gui': '#7B03C9', 'cterm': 'NONE', 'cterm256': 'NONE'}
+let s:cdLineNumber = {'gui': '#7B03C9', 'cterm': 'NONE', 'cterm256': 'NONE'}
 
 let s:cdDiffRedDark = {'gui': '#4B1818', 'cterm': 'NONE', 'cterm256': 'NONE'}
 let s:cdDiffRedLight = {'gui': '#6F1313', 'cterm': 'NONE', 'cterm256': 'NONE'}
@@ -109,6 +123,9 @@ let s:cdDarkBlue = {'gui': '#223E55', 'cterm': 'NONE', 'cterm256': 'NONE'}
 let s:cdLightBlue = {'gui': '#73bbf5', 'cterm': 'NONE', 'cterm256': 'NONE'}
 if g:purpura_conservative | let s:cdLightBlue = s:cdFront | endif
 let s:cdViolet = {'gui': '#8924c9', 'cterm': 'NONE', 'cterm256': 'NONE'}
+let s:cdVioletLighter = {'gui': '#982FDA', 'cterm': 'NONE', 'cterm256': 'NONE'}
+let s:cdVioletDark = {'gui': '#531579', 'cterm': 'NONE', 'cterm256': 'NONE'}
+let s:cdLightTeal = {'gui': '#79FCEB', 'cterm': 'NONE', 'cterm256': 'NONE'}
 let s:cdPinkGreen = {'gui': '#acff59', 'cterm': 'NONE', 'cterm256': 'NONE'}
 let s:cdLightGreen = {'gui': '#B5CEA8', 'cterm': 'NONE', 'cterm256': 'NONE'}
 let s:cdRed = {'gui': '#F44747', 'cterm': 'NONE', 'cterm256': 'NONE'}
@@ -116,7 +133,7 @@ let s:cdLightYellow = {'gui': '#ede093', 'cterm': 'NONE', 'cterm256': 'NONE'}
 let s:cdLightRed = {'gui': '#D16969', 'cterm': 'NONE', 'cterm256': 'NONE'}
 if g:purpura_conservative | let s:cdLightRed = s:cdLightYellow | endif
 let s:cdVeryLightGreenOrange = {'gui': '#D7BA7D', 'cterm': 'NONE', 'cterm256': 'NONE'}
-let s:cdVeryLightGreen = {'gui': '#ffc363', 'cterm': 'NONE', 'cterm256': 'NONE'}
+let s:cdVeryLightGreen = {'gui': '#FFC233', 'cterm': 'NONE', 'cterm256': 'NONE'}
 if g:purpura_conservative | let s:cdVeryLightGreen = s:cdFront | endif
 let s:cdPink = {'gui': '#ff00d4', 'cterm': 'NONE', 'cterm256': 'NONE'}
 if g:purpura_conservative | let s:cdPink = s:cdPink | endif
@@ -167,7 +184,7 @@ call <sid>hi('VisualNOS', s:cdNone, s:cdSelection, 'none', {})
 call <sid>hi('WarningMsg', s:cdLightYellow, s:cdBack, 'none', {})
 call <sid>hi('WildMenu', s:cdNone, s:cdSelection, 'none', {})
 
-call <sid>hi('Comment', s:cdViolet, {}, 'bold', {})
+call <sid>hi('Comment', s:cdVioletDark, {}, 'bold', {})
 
 call <sid>hi('Constant', s:cdPink, {}, 'none', {})
 call <sid>hi('String', s:cdLightYellow, {}, 'none', {})
@@ -227,10 +244,12 @@ call <sid>hi('markdownLinkText', s:cdLightYellow, {}, 'none', {})
 call <sid>hi('markdownEscape', s:cdVeryLightGreenOrange, {}, 'none', {})
 
 " JSON:
-call <sid>hi('jsonKeyword', s:cdLightBlue, {}, 'none', {})
-call <sid>hi('jsonEscape', s:cdVeryLightGreenOrange, {}, 'none', {})
+call <sid>hi('jsonKeyword', s:cdVioletLighter, {}, 'none', {})
+call <sid>hi('jsonEscape', s:cdLightTeal, {}, 'none', {})
 call <sid>hi('jsonNull', s:cdPink, {}, 'none', {})
-call <sid>hi('jsonBoolean', s:cdPink, {}, 'none', {})
+call <sid>hi('jsonBoolean', s:cdPinkGreen, {}, 'none', {})
+call <sid>hi('jsonString', s:cdVeryLightGreen, {}, 'none', {})
+call <sid>hi('jsonNumber', s:cdPinkGreen, {}, 'none', {})
 
 " HTML:
 call <sid>hi('htmlTag', s:cdGray, {}, 'none', {})
@@ -238,55 +257,73 @@ call <sid>hi('htmlEndTag', s:cdGray, {}, 'none', {})
 call <sid>hi('htmlTagName', s:cdPink, {}, 'none', {})
 call <sid>hi('htmlSpecialTagName', s:cdPink, {}, 'none', {})
 call <sid>hi('htmlArg', s:cdLightBlue, {}, 'none', {})
+call <sid>hi('htmlTag', s:cdPink, {}, 'none', {})
+call <sid>hi('htmlEndTag', s:cdPink, {}, 'none', {})
 
 " CSS:
-call <sid>hi('cssBraces', s:cdFront, {}, 'none', {})
-call <sid>hi('cssInclude', s:cdPink, {}, 'none', {})
-call <sid>hi('cssTagName', s:cdVeryLightGreenOrange, {}, 'none', {})
-call <sid>hi('cssClassName', s:cdVeryLightGreenOrange, {}, 'none', {})
+call <sid>hi('cssBraces', s:cdLeftLight, {}, 'none', {})
+call <sid>hi('cssInclude', s:cdPinkGreen, {}, 'none', {})
+call <sid>hi('cssTagName', s:cdPinkGreen, {}, 'none', {})
+call <sid>hi('cssClassName', s:cdPink, {}, 'none', {})
 call <sid>hi('cssPseudoClass', s:cdVeryLightGreenOrange, {}, 'none', {})
-call <sid>hi('cssPseudoClassId', s:cdVeryLightGreenOrange, {}, 'none', {})
-call <sid>hi('cssPseudoClassLang', s:cdVeryLightGreenOrange, {}, 'none', {})
-call <sid>hi('cssIdentifier', s:cdVeryLightGreenOrange, {}, 'none', {})
-call <sid>hi('cssProp', s:cdLightBlue, {}, 'none', {})
-call <sid>hi('cssDefinition', s:cdLightBlue, {}, 'none', {})
-call <sid>hi('cssAttr', s:cdLightYellow, {}, 'none', {})
-call <sid>hi('cssAttrRegion', s:cdLightYellow, {}, 'none', {})
-call <sid>hi('cssColor', s:cdLightYellow, {}, 'none', {})
-call <sid>hi('cssFunction', s:cdLightYellow, {}, 'none', {})
-call <sid>hi('cssFunctionName', s:cdLightYellow, {}, 'none', {})
-call <sid>hi('cssVendor', s:cdLightYellow, {}, 'none', {})
-call <sid>hi('cssValueNumber', s:cdLightYellow, {}, 'none', {})
-call <sid>hi('cssValueLength', s:cdLightYellow, {}, 'none', {})
-call <sid>hi('cssUnitDecorators', s:cdLightYellow, {}, 'none', {})
+call <sid>hi('cssPseudoClassId', s:cdVeryLightGreen, {}, 'none', {})
+call <sid>hi('cssPseudoClassLang', s:cdVeryLightGreen, {}, 'none', {})
+call <sid>hi('cssIdentifier', s:cdVeryLightGreen, {}, 'none', {})
+call <sid>hi('cssProp', s:cdVioletLighter, {}, 'none', {})
+call <sid>hi('cssPositioningProp', s:cdVioletLighter, {}, 'none', {})
+call <sid>hi('cssBoxProp', s:cdVioletLighter, {}, 'none', {})
+call <sid>hi('cssDimensionProp', s:cdVioletLighter, {}, 'none', {})
+call <sid>hi('cssTransitionProp', s:cdVioletLighter, {}, 'none', {})
+call <sid>hi('cssTextProp', s:cdVioletLighter, {}, 'none', {})
+call <sid>hi('cssFontProp', s:cdVioletLighter, {}, 'none', {})
+call <sid>hi('cssBorderProp', s:cdVioletLighter, {}, 'none', {})
+call <sid>hi('cssBorderAttr', s:cdPink, {}, 'none', {})
+call <sid>hi('cssBackgroundProp', s:cdVioletLighter, {}, 'none', {})
+call <sid>hi('cssUIProp', s:cdVioletLighter, {}, 'none', {})
+call <sid>hi('scssInclude', s:cdLightTeal, {}, 'none', {})
+call <sid>hi('cssDefinition', s:cdVioletLighter, {}, 'none', {})
+call <sid>hi('cssAttr', s:cdVeryLightGreen, {}, 'none', {})
+call <sid>hi('scssAttribute', s:cdVeryLightGreen, {}, 'none', {})
+call <sid>hi('cssAttrRegion', s:cdVeryLightGreen, {}, 'none', {})
+call <sid>hi('cssColor', s:cdVeryLightGreen, {}, 'none', {})
+call <sid>hi('cssFunction', s:cdVeryLightGreen, {}, 'none', {})
+call <sid>hi('cssFunctionName', s:cdVeryLightGreen, {}, 'none', {})
+call <sid>hi('cssVendor', s:cdPink, {}, 'none', {})
+call <sid>hi('cssValueNumber', s:cdVeryLightGreen, {}, 'none', {})
+call <sid>hi('cssValueLength', s:cdVeryLightGreen, {}, 'none', {})
+call <sid>hi('cssUnitDecorators', s:cdVeryLightGreen, {}, 'none', {})
+call <sid>hi('cssColorProp', s:cdLightTeal, {}, 'none', {})
+call <sid>hi('cssCommonAttr', s:cdPink, {}, 'none', {})
+call <sid>hi('cssPositioningAttr', s:cdLightTeal, {}, 'none', {})
+call <sid>hi('cssNoise', s:cdLightTeal, {}, 'none', {})
+call <sid>hi('cssTableAttr', s:cdPinkGreen, {}, 'none', {})
+call <sid>hi('cssSelectorOp', s:cdVeryLightGreen, {}, 'none', {})
+call <sid>hi('cssPseudoClassFn', s:cdPinkGreen, {}, 'none', {})
+call <sid>hi('cssUnicodeEscape', s:cdLightTeal, {}, 'none', {})
+call <sid>hi('cssValueAngle', s:cdLightTeal, {}, 'none', {})
+call <sid>hi('cssComment', s:cdViolet, {}, 'none', {})
 
 " SCSS:
-call <sid>hi('scssBraces', s:cdFront, {}, 'none', {})
-call <sid>hi('scssInclude', s:cdPink, {}, 'none', {})
-call <sid>hi('scssTagName', s:cdVeryLightGreenOrange, {}, 'none', {})
-call <sid>hi('scssClassName', s:cdVeryLightGreenOrange, {}, 'none', {})
-call <sid>hi('scssSelectorName', s:cdVeryLightGreenOrange, {}, 'none', {})
-call <sid>hi('scssPseudoClass', s:cdVeryLightGreenOrange, {}, 'none', {})
-call <sid>hi('scssPseudoClassId', s:cdVeryLightGreenOrange, {}, 'none', {})
-call <sid>hi('scssPseudoClassLang', s:cdVeryLightGreenOrange, {}, 'none', {})
-call <sid>hi('scssIdentifier', s:cdVeryLightGreenOrange, {}, 'none', {})
-call <sid>hi('scssProp', s:cdLightBlue, {}, 'none', {})
-call <sid>hi('scssDefinition', s:cdLightBlue, {}, 'none', {})
-call <sid>hi('scssAttr', s:cdLightYellow, {}, 'none', {})
-call <sid>hi('scssAttrRegion', s:cdLightYellow, {}, 'none', {})
-call <sid>hi('scssColor', s:cdLightYellow, {}, 'none', {})
-call <sid>hi('scssFunction', s:cdLightYellow, {}, 'none', {})
-call <sid>hi('scssFunctionName', s:cdLightYellow, {}, 'none', {})
-call <sid>hi('scssVendor', s:cdLightYellow, {}, 'none', {})
-call <sid>hi('scssValueNumber', s:cdLightYellow, {}, 'none', {})
-call <sid>hi('scssValueLength', s:cdLightYellow, {}, 'none', {})
-call <sid>hi('scssUnitDecorators', s:cdLightYellow, {}, 'none', {})
+call <sid>hi('scssSelectorName', s:cdPink, {}, 'none', {})
+call <sid>hi('scssFunctionName', s:cdPinkGreen, {}, 'none', {})
+call <sid>hi('scssInterpolationDelimiter', s:cdLightTeal, {}, 'none', {})
+call <sid>hi('scssParameterList', s:cdLightTeal, {}, 'none', {})
+call <sid>hi('scssMixinName', s:cdVeryLightGreen, {}, 'none', {})
+call <sid>hi('scssVariable', s:cdPinkGreen, {}, 'none', {})
+call <sid>hi('scssAmpersand', s:cdLightTeal, {}, 'none', {})
+call <sid>hi('scssComment', s:cdVioletDark, {}, 'none', {})
+call <sid>hi('scssSelectorChar', s:cdLightTeal, {}, 'none', {})
+call <sid>hi('scssCondition', s:cdLightTeal, {}, 'none', {})
+call <sid>hi('scssProperty', s:cdVioletLighter, {}, 'none', {})
+call <sid>hi('scssAttribute', s:cdDiffRedLightLight, {}, 'none', {})
+call <sid>hi('scssExtend', s:cdPinkGreen, {}, 'none', {})
 
 " JavaScript:
 call <sid>hi('jsVariableDef', s:cdLightBlue, {}, 'none', {})
 call <sid>hi('jsFuncArgs', s:cdLightBlue, {}, 'none', {})
-call <sid>hi('jsRegexpString', s:cdLightRed, {}, 'none', {})
+call <sid>hi('jsRegexpString', s:cdDiffRedLightLight, {}, 'none', {})
 call <sid>hi('jsThis', s:cdPink, {}, 'none', {})
+call <sid>hi('jsOperator', s:cdPinkGreen, {}, 'none', {})
 call <sid>hi('jsOperatorKeyword', s:cdPink, {}, 'none', {})
 call <sid>hi('jsDestructuringBlock', s:cdLightBlue, {}, 'none', {})
 call <sid>hi('jsObjectKey', s:cdLightBlue, {}, 'none', {})
@@ -299,9 +336,24 @@ call <sid>hi('jsExportDefault', s:cdPink, {}, 'none', {})
 call <sid>hi('jsFuncCall', s:cdVeryLightGreen, {}, 'none', {})
 call <sid>hi('jsObjectValue', s:cdLightBlue, {}, 'none', {})
 call <sid>hi('jsParen', s:cdLightBlue, {}, 'none', {})
+call <sid>hi('jsParenRepeat', s:cdVioletLighter, {}, 'none', {})
 call <sid>hi('jsObjectProp', s:cdLightBlue, {}, 'none', {})
 call <sid>hi('jsString', s:cdSearchCurrent, {}, 'none', {})
 call <sid>hi('jsComment', s:cdViolet, {}, 'none', {})
+call <sid>hi('jsParenIfElse', s:cdViolet, {}, 'none', {})
+call <sid>hi('jsNumber', s:cdPinkGreen, {}, 'none', {})
+call <sid>hi('jsBrackets', s:cdVioletLighter, {}, 'none', {})
+call <sid>hi('jsBracket', s:cdPinkGreen, {}, 'none', {})
+call <sid>hi('jsFuncBlock', s:cdVioletLighter, {}, 'none', {})
+call <sid>hi('jsIfElseBlock', s:cdLightBlue, {}, 'none', {})
+call <sid>hi('jsStorageClass', s:cdVioletLighter, {}, 'none', {})
+call <sid>hi('jsConditional', s:cdPink, {}, 'none', {})
+call <sid>hi('jsFunctionKey', s:cdPinkGreen, {}, 'none', {})
+call <sid>hi('jsFunction', s:cdLightTeal, {}, 'none', {})
+call <sid>hi('jsBooleanFalse', s:cdPink, {}, 'none', {})
+call <sid>hi('jsBooleanTrue', s:cdPinkGreen, {}, 'none', {})
+call <sid>hi('jsTemplateBraces', s:cdPinkGreen, {}, 'none', {})
+call <sid>hi('jsTemplateExpression', s:cdPinkGreen, {}, 'none', {})
 
 " Typescript:
 call <sid>hi('typescriptLabel', s:cdLightBlue, {}, 'none', {})
@@ -369,6 +421,8 @@ call <sid>hi('typescriptAsyncFuncKeyword', s:cdPink, {}, 'none', {})
 call <sid>hi('typescriptFuncKeyword', s:cdPink, {}, 'none', {})
 call <sid>hi('typescriptGlobalMethod', s:cdVeryLightGreen, {}, 'none', {})
 call <sid>hi('typescriptPromiseMethod', s:cdVeryLightGreen, {}, 'none', {})
+call <sid>hi('typescriptTry', s:cdLightTeal, {}, 'none', {})
+call <sid>hi('typescriptKeywordOp', s:cdVioletLighter, {}, 'none', {})
 
 " XML:
 call <sid>hi('xmlTag', s:cdPinkGreen, {}, 'none', {})
@@ -449,3 +503,19 @@ call <sid>hi('luaFuncArgName', s:cdLightBlue, {}, 'none', {})
 call <sid>hi('luaFuncKeyword', s:cdPink, {}, 'none', {})
 call <sid>hi('luaLocal', s:cdPink, {}, 'none', {})
 call <sid>hi('luaBuiltIn', s:cdPink, {}, 'none', {})
+
+" Liquid:
+call <sid>hi('liquidStatement', s:cdVioletLighter, {}, '', {})
+call <sid>hi('liquidDelimiter', s:cdLightTeal, {}, '', {})
+call <sid>hi('liquidConditional', s:cdPink, {}, '', {})
+call <sid>hi('liquidOperator', s:cdLightTeal, {}, '', {})
+call <sid>hi('liquidNumber', s:cdPinkGreen, {}, '', {})
+
+" JSX:
+call <sid>hi('jsxOpenPunct', s:cdPink, {}, '', {})
+call <sid>hi('jsxClosePunct', s:cdPink, {}, '', {})
+call <sid>hi('jsxDot', s:cdPink, {}, '', {})
+call <sid>hi('jsxComponentName', s:cdPinkGreen, {}, '', {})
+call <sid>hi('jsxBraces', s:cdLightTeal, {}, '', {})
+call <sid>hi('jsxExpressionBlock', s:cdLightTeal, {}, '', {})
+
