@@ -354,6 +354,7 @@ call <sid>hi('jsBooleanFalse', s:cdPink, {}, 'none', {})
 call <sid>hi('jsBooleanTrue', s:cdPinkGreen, {}, 'none', {})
 call <sid>hi('jsTemplateBraces', s:cdPinkGreen, {}, 'none', {})
 call <sid>hi('jsTemplateExpression', s:cdPinkGreen, {}, 'none', {})
+call <sid>hi('jsReturn', s:cdPink, {}, 'none', {})
 
 " Typescript:
 call <sid>hi('typescriptLabel', s:cdLightBlue, {}, 'none', {})
