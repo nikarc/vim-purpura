@@ -122,11 +122,12 @@ let s:cdGray = {'gui': '#808080', 'cterm': 'NONE', 'cterm256': 'NONE'}
 let s:cdDarkBlue = {'gui': '#223E55', 'cterm': 'NONE', 'cterm256': 'NONE'}
 let s:cdLightBlue = {'gui': '#73bbf5', 'cterm': 'NONE', 'cterm256': 'NONE'}
 if g:purpura_conservative | let s:cdLightBlue = s:cdFront | endif
-let s:cdViolet = {'gui': '#8924c9', 'cterm': 'NONE', 'cterm256': 'NONE'}
-let s:cdVioletLighter = {'gui': '#982FDA', 'cterm': 'NONE', 'cterm256': 'NONE'}
-let s:cdVioletDark = {'gui': '#531579', 'cterm': 'NONE', 'cterm256': 'NONE'}
+let s:cdViolet = {'gui': '#B467E4', 'cterm': 'NONE', 'cterm256': 'NONE'}
+let s:cdVioletLighter = {'gui': '#B467E4', 'cterm': 'NONE', 'cterm256': 'NONE'}
+let s:cdVioletDark = {'gui': '#7A1EB2', 'cterm': 'NONE', 'cterm256': 'NONE'}
 let s:cdLightTeal = {'gui': '#79FCEB', 'cterm': 'NONE', 'cterm256': 'NONE'}
 let s:cdPinkGreen = {'gui': '#acff59', 'cterm': 'NONE', 'cterm256': 'NONE'}
+let s:cdPinkGreenDark = {'gui': '#4C7327', 'cterm': 'NONE', 'cterm256': 'NONE'}
 let s:cdLightGreen = {'gui': '#B5CEA8', 'cterm': 'NONE', 'cterm256': 'NONE'}
 let s:cdRed = {'gui': '#F44747', 'cterm': 'NONE', 'cterm256': 'NONE'}
 let s:cdLightYellow = {'gui': '#ede093', 'cterm': 'NONE', 'cterm256': 'NONE'}
@@ -424,6 +425,8 @@ call <sid>hi('typescriptGlobalMethod', s:cdVeryLightGreen, {}, 'none', {})
 call <sid>hi('typescriptPromiseMethod', s:cdVeryLightGreen, {}, 'none', {})
 call <sid>hi('typescriptTry', s:cdLightTeal, {}, 'none', {})
 call <sid>hi('typescriptKeywordOp', s:cdVioletLighter, {}, 'none', {})
+call <sid>hi('typescriptConditionalParen', s:cdVioletLighter, {}, 'none', {})
+call <sid>hi('typescriptConditional', s:cdVioletLighter, {}, 'none', {})
 
 " XML:
 call <sid>hi('xmlTag', s:cdPinkGreen, {}, 'none', {})
