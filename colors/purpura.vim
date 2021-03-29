@@ -185,7 +185,7 @@ call <sid>hi('VisualNOS', s:cdNone, s:cdSelection, 'none', {})
 call <sid>hi('WarningMsg', s:cdLightYellow, s:cdBack, 'none', {})
 call <sid>hi('WildMenu', s:cdNone, s:cdSelection, 'none', {})
 
-call <sid>hi('Comment', s:cdVioletDark, {}, 'bold', {})
+call <sid>hi('Comment', s:cdVeryLightGreen , {}, '', {})
 
 call <sid>hi('Constant', s:cdPink, {}, 'none', {})
 call <sid>hi('String', s:cdLightYellow, {}, 'none', {})
@@ -514,6 +514,7 @@ call <sid>hi('liquidDelimiter', s:cdLightTeal, {}, '', {})
 call <sid>hi('liquidConditional', s:cdPink, {}, '', {})
 call <sid>hi('liquidOperator', s:cdLightTeal, {}, '', {})
 call <sid>hi('liquidNumber', s:cdPinkGreen, {}, '', {})
+call <sid>hi('liquidComment', s:cdVeryLightGreen , {}, '', {})
 
 " JSX:
 call <sid>hi('jsxOpenPunct', s:cdPink, {}, '', {})
